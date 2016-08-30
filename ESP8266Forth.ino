@@ -34,8 +34,8 @@
    HAS_MOTOR_CONTROLLER must be defined to use a connected L293D motor controller chip
 
    Concept and Porting by: Craig A. Lindley
-   Version: 0.6
-   Last Update: 04/30/2016
+   Version: 0.61
+   Last Update: 08/30/2016
 
    Copyright (c) 2015, 2016 Craig A. Lindley
 
@@ -157,6 +157,10 @@ void setup(void) {
   // Set display orientation
   lcd.setRotation(3);
 #endif
+
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect();
+  delay(100);
 
   // Initialize WiFi whether it is used or not
   WiFi.begin(WIFI_SSID, WIFI_PASS);

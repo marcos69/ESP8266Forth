@@ -85,6 +85,7 @@
 #define CASE_SYS     -3
 #define OF_SYS       -4
 #define LOOP_SYS     -5
+#define LEAVE_SYS    -6
 
 /******************************************************************************/
 /**  Cell Definitions & Stacks                                               **/
