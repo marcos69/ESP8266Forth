@@ -1989,7 +1989,7 @@ const PROGMEM char restart_str[] = "restart";
 static void _restart(void) {
   ioDirector.printString("\n\n*** System Restart ***\n\n");
   delay(1000);
-
+#ifdef ESP8266
   // Pull reset line low to force hardware reset
   digitalWrite(GPIO_RESET, LOW);
   pinMode(GPIO_RESET, OUTPUT);
@@ -1997,6 +1997,7 @@ static void _restart(void) {
   // Change mode back to input or we won't be able to
   // upload code.
   pinMode(GPIO_RESET, INPUT);
+#endif
 }
 
 const PROGMEM char randomMax_str[] = "randomMax";
