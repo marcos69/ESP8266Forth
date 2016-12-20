@@ -62,8 +62,13 @@
 // #define HAS_LCD              // Uncomment this to use LCD functionality
 // #define HAS_MOTOR_CONTROLLER // Uncomment to add motor controller functionality
 
+// #define ESP8266              // Uncomment if using wifi(telnet) with esp8266
+// #define ESP32                // esp32 momentary NO wifi only serial
+
 #include <Arduino.h>
+#ifdef ESP8266
 #include <ESP8266WiFi.h>
+#endif
 
 #ifdef HAS_SD_CARD
 #include <SD.h>
@@ -84,8 +89,10 @@
 const int SERIAL_BAUDRATE = 115200;
 
 // WiFi login credentials
-const char *WIFI_SSID = "CraigNet";
-const char *WIFI_PASS = "craigandheather";
+#ifdef ESP8266
+const char *WIFI_SSID = "your_ssid";
+const char *WIFI_PASS = "your_password";
+#endif
 
 // Hardware Configuration
 #ifdef HAS_SD_CARD
@@ -158,6 +165,7 @@ void setup(void) {
   lcd.setRotation(3);
 #endif
 
+#ifdef ESP8266
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
   delay(100);
@@ -185,7 +193,8 @@ void setup(void) {
   // Start the Telnet server
   server.begin();
   server.setNoDelay(true);
-
+#endif
+   
   print_P(PSTR("\nESP8266 32 bit Forth for the NodeMCU Amica\n"));
   print_P(PSTR("Incorporates Yaffa by Stuart Wood\n"));
   print_P(PSTR("Copyright (C) 2015, 2016 Craig A. Lindley\n"));
