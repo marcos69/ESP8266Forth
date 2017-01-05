@@ -1948,6 +1948,7 @@ static void _analogRead(void) {
   push(analogRead(pop()));
 }
 
+#ifdef ESP8266
 const PROGMEM char analogWrite_str[] = "analogWrite";
 // ( u1 u2 -- )
 // Write analog PWM value to a pin
@@ -1955,6 +1956,7 @@ const PROGMEM char analogWrite_str[] = "analogWrite";
 static void _analogWrite(void) {
   analogWrite(pop(), pop());
 }
+#endif
 
 const PROGMEM char to_name_str[] = ">name";
 static void _toName(void) {
@@ -2582,7 +2584,9 @@ const PROGMEM flashEntry_t flashDict[] = {
   { pinMode_str,        _pinMode,         NORMAL },    // 150
   { pinRead_str,        _pinRead,         NORMAL },
   { analogRead_str,     _analogRead,      NORMAL },
+#ifdef ESP8266  
   { analogWrite_str,    _analogWrite,     NORMAL },    // 153
+#endif
 #endif
 
 #ifdef EN_EEPROM_OPS
