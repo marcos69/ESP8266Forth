@@ -36,7 +36,7 @@
 //#define SEARCH_SET
 //#define STRING_SET
 #define EN_ARDUINO_OPS
-#define EN_EEPROM_OPS
+//#define EN_EEPROM_OPS
 #define EN_CALEXT_OPS  // CAL extensions
 
 /******************************************************************************/
