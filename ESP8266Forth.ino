@@ -70,6 +70,10 @@
 #include <ESP8266WiFi.h>
 #endif
 
+#ifdef ESP32
+#include <WiFi.h>
+#endif
+
 #ifdef HAS_SD_CARD
 #include <SD.h>
 #include <SPI.h>
@@ -89,10 +93,8 @@
 const int SERIAL_BAUDRATE = 115200;
 
 // WiFi login credentials
-#ifdef ESP8266
 const char *WIFI_SSID = "your_ssid";
 const char *WIFI_PASS = "your_password";
-#endif
 
 // Hardware Configuration
 #ifdef HAS_SD_CARD
@@ -165,7 +167,6 @@ void setup(void) {
   lcd.setRotation(3);
 #endif
 
-#ifdef ESP8266
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
   delay(100);
@@ -192,6 +193,7 @@ void setup(void) {
 
   // Start the Telnet server
   server.begin();
+#ifndef ESP32   
   server.setNoDelay(true);
 #endif
    
