@@ -69,9 +69,12 @@
 /**    Fix ENVIRONMENT? Query to take a string reference from the stack.     **/
 /**                                                                          **/
 /******************************************************************************/
+#ifndef ESP32
 #ifdef EN_EEPROM_OPS
 #include <EEPROM.h>
 #endif
+#endif
+
 #include <pgmspace.h>
 #include "Yaffa.h"
 #include "Error_Codes.h"
