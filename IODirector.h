@@ -26,14 +26,12 @@
 // Three supported channels for I/O
 enum CHANNELS {SERIAL_IO, FILE_IO, NET_IO};
 
-#ifdef ESP8266
 // Server port IODirector listens on
 const int SERVER_PORT = 21;
 
 // The networking components
 WiFiServer server(SERVER_PORT);
 WiFiClient serverClient;
-#endif
 
 // IODirector class definition
 class IODirector {
@@ -103,7 +101,6 @@ class IODirector {
           break;
 
         case NET_IO:
-#ifdef ESP8266
           if (! serverClient.connected()) {
             // Wait for a connection to be made
             serverClient = server.available();
@@ -122,7 +119,6 @@ class IODirector {
           for (int i = 0; i < charCount; i++) {
             serverClient.write(get(&outQueue));
           }
-#endif
           break;
       }
     }
@@ -188,7 +184,6 @@ class IODirector {
       // Save new channel
       currentChannel = channel;
 
-#ifdef ESP8266
       // Network I/O selected ?
       if (channel == NET_IO) {
         if ((! serverClient) || (! serverClient.connected())) {
@@ -198,7 +193,6 @@ class IODirector {
           }
         }
       }
-#endif
     }
 
     // See if input queue has any chars to return
